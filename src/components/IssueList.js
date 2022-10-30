@@ -9,7 +9,7 @@ const IssueList = () => {
     const state = useContext(StateContext);
     const { issueData } = state;
     const [target, setTarget] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [itemLists, setItemLists] = useState(issueData);
 
     useEffect(() => {
@@ -24,19 +24,23 @@ const IssueList = () => {
     }, [target]);
 
     const onIntersect = async ([entry], observer) => {
-        if (entry.isIntersecting && !isLoaded) {
+        if (entry.isIntersecting && !isLoading) {
             observer.unobserve(entry.target);
             await nextIssueItem();
             observer.observe(entry.target);
         }
     };
+
+    const loadingTerm = async () => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+    };
     let num = 2;
     const nextIssueItem = async () => {
-        setIsLoaded(true);
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        setIsLoading(true);
+        loadingTerm();
         const request = await getData(num);
         setItemLists((prev) => prev.concat(request));
-        setIsLoaded(false);
+        setIsLoading(false);
         num++;
     };
     console.log(itemLists);
@@ -54,7 +58,7 @@ const IssueList = () => {
                     />
                 ))}
             <div style={{ border: "1px solid black" }} ref={setTarget}>
-                {isLoaded && <Loader />}
+                {isLoading && <Loader />}
             </div>
         </IssueListWrapper>
     );
