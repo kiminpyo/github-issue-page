@@ -4,6 +4,10 @@
 github에서 제공하는 통신 octokit을 이용해 github에 있는 angular의 issue를 보여주는 페이지입니다. 
 상태관리는 useReducer + contextAPI로 진행했고, styled-components로 css를 스타일링 했습니다.
 ```
+## 배포 링크
+
+[배포링크 바로가기](https://comfy-griffin-242f78.netlify.app/)
+<br/>
 
 ### 📆 기간
 
@@ -35,12 +39,6 @@ npm install
 ```
  npm start
 ```
-
-### 배포 링크
-
-[배포링크 바로가기](https://comfy-griffin-242f78.netlify.app/)
-<br/>
-
 ## 프로젝트 설명
 
 <details>
